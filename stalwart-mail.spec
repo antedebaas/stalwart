@@ -61,7 +61,7 @@ export CARGO_TARGET_DIR=%{_builddir}/stalwart-%{version}/target
 # EPEL10-specific RUSTFLAGS to work around LLVM optimization bugs
 # that cause "Instruction does not dominate all uses!" errors
 %if 0%{?rhel} >= 10 || 0%{?el10}
-export RUSTFLAGS="-Copt-level=2 -Ccodegen-units=4 -Ctarget-cpu=x86-64 -Clto=off -Clink-dead-code=off"
+export RUSTFLAGS="-Copt-level=2 -Ccodegen-units=4 -Clto=off -Clink-dead-code=off"
 %else
 export RUSTFLAGS="-Ccodegen-units=1 -Clink-dead-code=off"
 %endif
