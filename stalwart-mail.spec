@@ -30,6 +30,8 @@ ExcludeArch:    i686 s390 %{power64}
 %bcond_with check
 %endif
 
+%global debug_package %{nil}
+
 Requires:       glibc
 Requires:       openssl
 Requires:       systemd
@@ -53,10 +55,9 @@ clustering support, and web-based administration interface.
 %autosetup -n stalwart-%{version}
 
 %build
-# Set build environment for optimal compilation with debug info
+# Set build environment for optimal compilation
 export CARGO_TARGET_DIR=%{_builddir}/stalwart-%{version}/target
-export RUSTFLAGS="-Ccodegen-units=1 -Clink-dead-code=off -g"
-export CARGO_PROFILE_RELEASE_DEBUG=true
+export RUSTFLAGS="-Ccodegen-units=1 -Clink-dead-code=off"
 
 # Ensure we have a proper Cargo.lock
 [ -f Cargo.lock ] || cargo generate-lockfile
